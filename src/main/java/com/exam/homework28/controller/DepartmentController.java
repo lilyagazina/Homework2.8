@@ -1,5 +1,6 @@
 package com.exam.homework28.controller;
 
+import com.exam.homework28.model.Employee;
 import com.exam.homework28.service.DepartmentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +23,18 @@ public class DepartmentController {
     public Collection maxSalary(@RequestParam("departmentId") int departmentId) {
         return departmentService.maxSalary(departmentId);
     }
+    @GetMapping(path = "/min-salary")
+    public Collection minSalary(@RequestParam("departmentId") int departmentId) {
+        return departmentService.minSalary(departmentId);
+    }
+    @GetMapping(path = "/return-all")
+    public Collection returnAll(@RequestParam("departmentId") int departmentId) {
+        return departmentService.returnAll(departmentId);
+    }
+    @GetMapping(path = "/all")
+    public Collection findAll() {
+        return departmentService.findAll();
+    }
+
 }
 
