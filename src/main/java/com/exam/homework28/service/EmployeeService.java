@@ -4,12 +4,11 @@ import com.exam.homework28.exception.EmployeeAlreadyAddedException;
 import com.exam.homework28.exception.EmployeeNotFoundException;
 import com.exam.homework28.model.Employee;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
+
 @Service
 public class EmployeeService {
     private final Map<String, Employee> employees;
@@ -18,10 +17,8 @@ public class EmployeeService {
         this.employees = new HashMap<>();
     }
 
-    @GetMapping
-    public Employee addEmployee(String firstName, String lastName) {
-        // Добавить сотрудника.
-        Employee employee = new Employee(firstName, lastName);
+    public Employee add(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -30,10 +27,8 @@ public class EmployeeService {
     }
 
 
-    @GetMapping
-    public Employee removeEmployee(String firstName, String lastName) {
-        // Удалить сотрудника.
-        Employee employee = new Employee(firstName, lastName);
+    public Employee remove(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(employee.getFullName())) {
             employees.remove(employee.getFullName());
             return employee;
@@ -41,19 +36,21 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
     }
 
-    @GetMapping
-    public Employee findEmployee(String firstName, String lastName) {
-        //Найти сотрудника.
-        Employee employee = new Employee(firstName, lastName);
+
+    public Employee find(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(employee.getFullName())) {
-            return employees.get(employee.getFullName());
+            return employee;
         }
         throw new EmployeeNotFoundException();
     }
 
-    public Collection<Employee> findAll() {
-        return Collections.unmodifiableCollection(employees.values());
+
+    public List<Employee> findAll() {
+        List<Employee> employeeList = new ArrayList<>(employees.values());
+        return employeeList;
     }
+
 
 }
 
