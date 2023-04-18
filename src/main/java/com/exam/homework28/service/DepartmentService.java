@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 
 @Service
@@ -38,11 +42,11 @@ public class DepartmentService {
                 .collect(Collectors.toList());
     }
 
-    public List<Employee> findAll() {
+    public Map<Integer, List<Employee>> findAll() {
         return employeeList.stream()
-                .sorted(Comparator.comparingInt(Employee::getDepartment))
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(Employee::getDepartment));
 
     }
+
 }
 
