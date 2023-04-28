@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping(path = "/department")
+@RequestMapping(path = "/departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -22,16 +22,16 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/max-salary")
-    public Collection maxSalary(@RequestParam("departmentId") int departmentId) {
-        return departmentService.maxSalary(departmentId);
+    public Employee maxSalary(@RequestParam("departmentId") int department) {
+        return departmentService.maxSalary(department);
     }
     @GetMapping(path = "/min-salary")
-    public Collection minSalary(@RequestParam("departmentId") int departmentId) {
-        return departmentService.minSalary(departmentId);
+    public Employee minSalary(@RequestParam("departmentId") int department) {
+        return departmentService.minSalary(department);
     }
-    @GetMapping(path = "/return-all")
-    public Collection returnAll(@RequestParam("departmentId") int departmentId) {
-        return departmentService.returnAll(departmentId);
+    @GetMapping(value = "/return-all", params = "departmentId")
+    public Collection returnAll(@RequestParam("departmentId") int department) {
+        return departmentService.returnAll(department);
     }
     @GetMapping(path = "/all")
     public Map<Integer, List<Employee>> findAll() {

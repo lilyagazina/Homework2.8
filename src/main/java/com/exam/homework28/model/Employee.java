@@ -31,6 +31,10 @@ public class Employee {
         return salary;
     }
 
+    public void setDepartment(int department) {
+        this.department = department;
+    }
+
     public int getDepartment() {
         return department;
     }
