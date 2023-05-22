@@ -2,56 +2,67 @@ package com.exam.homework28.service;
 
 import com.exam.homework28.exception.EmployeeAlreadyAddedException;
 import com.exam.homework28.exception.EmployeeNotFoundException;
+import com.exam.homework28.exception.EmployeeStorageIsFullException;
 import com.exam.homework28.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EmployeeService {
-    private final Map<String, Employee> employees;
 
-    public EmployeeService() {
-        this.employees = new HashMap<>();
+    private static final int LIMIT = 10;
+
+    private final List<Employee> employees = new ArrayList<>();
+
+    private final ValidatorService validatorService;
+
+    public EmployeeService(ValidatorService validatorService) {
+        this.validatorService = validatorService;
     }
 
-    public Employee add(String firstName, String lastName, int salary, int department) {
-        Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
+    public Employee add(String name,
+                        String surname,
+                        int department,
+                        double salary) {
+        Employee employee = new Employee(
+                validatorService.validateName(name),
+                validatorService.validateSurname(surname),
+                department,
+                salary
+        );
+        if (employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.put(employee.getFullName(), employee);
+        if (employees.size() < LIMIT) {
+            employees.add(employee);
+            return employee;
+        }
+        throw new EmployeeStorageIsFullException();
+    }
+
+    public Employee remove(String name,
+                           String surname) {
+        Employee employee = employees.stream()
+                .filter(emp -> emp.getName().equals(name) && emp.getSurname().equals(surname))
+                .findFirst()
+               .orElseThrow(EmployeeNotFoundException::new);
+        employees.remove(employee);
         return employee;
     }
 
-
-    public Employee remove(String firstName, String lastName, int salary, int department) {
-        Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
-            employees.remove(employee.getFullName());
-            return employee;
-        }
-        throw new EmployeeNotFoundException();
+    public Employee find(String name,
+                         String surname) {
+        return employees.stream()
+                .filter(employee -> employee.getName().equals(name) && employee.getSurname().equals(surname))
+                .findFirst()
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
-
-    public Employee find(String firstName, String lastName, int salary, int department) {
-        Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
-            return employee;
-        }
-        throw new EmployeeNotFoundException();
+    public List<Employee> getAll() {
+        return new ArrayList<>(employees);
     }
-
-
-    public List<Employee> findAll() {
-        List<Employee> employeeList = new ArrayList<>(employees.values());
-        return employeeList;
-    }
-
 
 }
-
-

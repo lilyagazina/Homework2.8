@@ -1,23 +1,25 @@
-http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov&salary=300&departmentId=2
+http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov&departmentId=2&salary=300
 ###
-http://localhost:8080/employee/add?firstName=Sergi&lastName=Dhgnov&salary=3000&departmentId=1
+http://localhost:8080/employee/add?firstName=Sergi&lastName=Razin&salary=200&departmentId=2
 ###
-http://localhost:8080/employee/add?firstName=Hgi&lastName=Tynov&salary=200&departmentId=2
+http://localhost:8080/employee/add?firstName=Dima&lastName=Baranov&salary=100&departmentId=2
 ###
-http://localhost:8080/employee/add?firstName=Dima&lastName=Simonov&salary=400&departmentId=2
+http://localhost:8080/employee/add?firstName=Ryt&lastName=Ratacov&salary=400&departmentId=1
 ###
-http://localhost:8080/employee/add?firstName=Maria&lastName=Razina&salary=100&departmentId=3
+http://localhost:8080/employee/add?firstName=Anna&lastName=Samoylova&salary=600&departmentId=3
 ###
-http://localhost:8080/employee/remove?firstName=Maria&lastName=Razina&salary=100&departmentId=3
+http://localhost:8080/employee/add?firstName=Lu&lastName=Vivien&salary=600&departmentId=3
 ###
-http://localhost:8080/employee/findAll
+http://localhost:8080/employee/add?firstName=maxim&lastName=medvedev&salary=100&departmentId=3
 ###
-http://localhost:8080/employee/find?firstName=Dima&lastName=Simonov&salary=400&departmentId=2
+http://localhost:8080/department/{id}/employees
 ###
-http://localhost:8080/departments/max-salary?departmentId=2
+GET http://localhost:8080/department/{id}/salary/sum
 ###
-http://localhost:8080/departments/min-salary?departmentId=2
+GET http://localhost:8080/department/{id}/salary/max
 ###
-http://localhost:8080/departments/all
+GET http://localhost:8080/department/{id}/salary/min
 ###
-http://localhost:8080/departments/return-all?departmentId=2
+GET http://localhost:8080/department/employees
+
+
