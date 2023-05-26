@@ -93,6 +93,8 @@ public class EmployeeServiceTest {
                                 employee.getSalary()
                         )
                 );
+        assertThatExceptionOfType(EmployeeStorageIsFullException.class)
+                .isThrownBy(() -> employeeService.add("Ivanov", "Ivanov", 1, 70_0000));
     }
 
     @Test
