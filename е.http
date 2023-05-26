@@ -1,0 +1,25 @@
+http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov&departmentId=2&salary=300
+###
+http://localhost:8080/employee/add?firstName=Sergi&lastName=Razin&salary=200&departmentId=2
+###
+http://localhost:8080/employee/add?firstName=Dima&lastName=Baranov&salary=100&departmentId=2
+###
+http://localhost:8080/employee/add?firstName=Ryt&lastName=Ratacov&salary=400&departmentId=1
+###
+http://localhost:8080/employee/add?firstName=Anna&lastName=Samoylova&salary=600&departmentId=3
+###
+http://localhost:8080/employee/add?firstName=Lu&lastName=Vivien&salary=600&departmentId=3
+###
+http://localhost:8080/employee/add?firstName=maxim&lastName=medvedev&salary=100&departmentId=3
+###
+http://localhost:8080/department/{id}/employees
+###
+GET http://localhost:8080/department/{id}/salary/sum
+###
+GET http://localhost:8080/department/{id}/salary/max
+###
+GET http://localhost:8080/department/{id}/salary/min
+###
+GET http://localhost:8080/department/employees
+
+
